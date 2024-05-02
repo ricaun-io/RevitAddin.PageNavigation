@@ -7,7 +7,29 @@
         xmlns:local="clr-namespace:RevitAddin.PageNavigation.Views"
         mc:Ignorable="d">
 
-    <Grid>
-        <Frame x:Name="Frame"></Frame>
-    </Grid>
+    <DockPanel>
+        <!-- Navigation Buttons -->
+        <Border DockPanel.Dock="Left"
+                BorderBrush="DarkGray"
+                BorderThickness="0,0,1,0">
+            <ItemsControl ItemsSource="{Binding Pages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding}"
+                                Height="24"
+                                Margin="4" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+        <Grid>
+            <Frame Name="Frame"
+                   Margin="4"
+                   NavigationUIVisibility="Hidden"
+                   HorizontalContentAlignment="Stretch"
+                   VerticalContentAlignment="Stretch" />
+        </Grid>
+    </DockPanel>
 </Window>

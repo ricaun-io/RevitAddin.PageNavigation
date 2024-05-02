@@ -13,29 +13,14 @@ namespace RevitAddin.PageNavigation.Revit.Commands
         {
             UIApplication uiapp = commandData.Application;
 
-            var pageIndex = 0;
             var pages = new Page[]
             {
                 new Views.Pages.HomePage(),
-                new Views.Pages.ConfigPage()
+                new Views.Pages.ConfigPage(),
+                new Views.Pages.AboutPage(),
             };
 
-            var pageView = new Views.PageView(pages[pageIndex]);
-            pageView.Frame.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
-
-            pageView.KeyDown += (sender, e) =>
-            {
-                if (e.Key == System.Windows.Input.Key.Up)
-                {
-                    pageIndex = (pageIndex + 1) % pages.Length;
-                    pageView.Frame.Navigate(pages[pageIndex]);
-                }
-                if (e.Key == System.Windows.Input.Key.Down)
-                {
-                    pageIndex = (pages.Length + pageIndex - 1) % pages.Length;
-                    pageView.Frame.Navigate(pages[pageIndex]);
-                }
-            };
+            var pageView = new Views.PageView(pages);
 
             pageView.ShowDialog();
 
